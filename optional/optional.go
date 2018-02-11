@@ -1,8 +1,6 @@
 package optional
 
-import (
-	"errors"
-)
+import "errors"
 
 type optional struct {
 	v     interface{}
@@ -23,13 +21,18 @@ func OfEmpty() optional {
 	return o
 }
 
-/* Get the value and a potential error if the optional is empty */
+/* Get the optional value with an eventual error if the optional is empty */
 func (v *optional) Get() (interface{}, error) {
 	if v.IsPresent() {
 		return v.v, nil
 	}
 
 	return nil, errors.New("optional is empty")
+}
+
+/* Get the optional value regardless of its emptiness */
+func (v *optional) GetValue() (interface{}) {
+	return v.v
 }
 
 /* Test whether the optional is not empty */
