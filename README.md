@@ -15,8 +15,52 @@ _, err := optional.Of(nil)
 opt := optional.OfEmpty()
 ```
 
-## Features
+### Nil pointer
 
+```go
+var nilPointer *int
+_, err := Of(nilPointer) // err is not nil
+```
+
+### Nil array
+
+```go
+nilArray := [3]int{}
+_, err := Of(nilArray) // err is not nil
+```
+
+### Nil slice
+
+```go
+var nilSlice []int
+_, err := Of(nilSlice) // err is not nil
+```
+
+### Nil map
+
+```go
+var nilMap map[int]int
+_, err := Of(nilMap) // err is not nil
+```
+
+### Nil function
+
+```go
+var nilFunction func()
+_, err := Of(nilFunction) // err is not nil
+```
+
+### Nil structure
+
+```go
+type Point struct {
+	x, y int
+}
+var emptyPoint Point
+_, err = Of(emptyPoint) // err is nil
+```
+
+## Features
 
 ```go
 // Get its value and an eventual error if the optional is empty
