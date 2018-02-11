@@ -55,6 +55,23 @@ func TestArray(t *testing.T) {
 	}
 }
 
+func TestMap(t *testing.T) {
+	m := map[int]int{3: 2}
+	var nilMap map[int]int
+
+	_, err := Of(m)
+
+	if err != nil {
+		t.FailNow()
+	}
+
+	_, err = Of(nilMap)
+
+	if err == nil {
+		t.FailNow()
+	}
+}
+
 func TestSlice(t *testing.T) {
 	slice := []int{1, 2, 3}
 	var nilSlice []int
