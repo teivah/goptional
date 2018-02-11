@@ -16,7 +16,7 @@ opt := optional.OfEmpty()
 
 
 ```go
-// Get its value and a eventual error if the optional is empty
+// Get its value and an eventual error if the optional is empty
 v, err := opt.Get()
 
 // Get the optional value regardless of its emptiness
