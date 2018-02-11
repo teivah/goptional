@@ -2,7 +2,7 @@
 
 goptional is a lightweight library to provide a container for optional values.
 
-# Examples
+## Initialization
 
 ```go
 // Create an optional with an initial value
@@ -10,7 +10,12 @@ opt := optional.Of(5)
 
 // Create an empty optional
 opt := optional.OfEmpty()
+```
 
+## Features
+
+
+```go
 // Get its value and a eventual error if the optional is empty
 v, err := opt.Get()
 
