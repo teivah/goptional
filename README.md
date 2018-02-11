@@ -1,6 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/gojp/goreportcard)](https://goreportcard.com/report/gojp/goreportcard)
 
-goptional is a lightweight library to provide a container for optional values.
+goptional is a lightweight library to provide a container for optional values in golang.
 
 ## Initialization
 
