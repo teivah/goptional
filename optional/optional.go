@@ -6,6 +6,7 @@ package optional
 
 import (
 	"errors"
+	"reflect"
 )
 
 type optional struct {
@@ -13,10 +14,41 @@ type optional struct {
 	empty bool
 }
 
+// Test if an input is the default zero value
+func isZeroed(in interface{}, t reflect.Type) bool {
+	return in == reflect.Zero(t).Interface()
+}
+
+// Test if nil depending on its type
+func isNil(in interface{}) bool {
+	if in == nil {
+		return true
+	}
+
+	t := reflect.TypeOf(in)
+
+	switch t.Kind() {
+	case reflect.Ptr, reflect.Array:
+		if isZeroed(in, t) {
+			return true
+		}
+	case reflect.Slice, reflect.Func, reflect.Map:
+		value := reflect.ValueOf(in)
+
+		if value.IsNil() {
+			return true
+		}
+	case reflect.Struct:
+		return false
+	}
+
+	return false
+}
+
 // Create an optional with an initial value
 func Of(in interface{}) (optional, error) {
-	if in == nil {
-		return optional{nil, true}, errors.New("input shall not be null")
+	if isNil(in) {
+		return optional{nil, true}, errors.New("input shall not be nil")
 	}
 
 	return optional{in, false}, nil
