@@ -1,8 +1,6 @@
 [![Go Report Card](https://goreportcard.com/badge/gojp/goreportcard)](https://goreportcard.com/report/gojp/goreportcard)
 
-Golang implements the zero value principle. Therefore, it can be tricky to differentiate empty from nil values.
-
-goptional is a lightweight library to deal with this issue.
+goptional is a lightweight library to provide a container for optional values.
 
 # Examples
 
@@ -15,6 +13,9 @@ opt := optional.OfEmpty()
 
 // Get its value and a eventual error if the optional is empty
 v, err := opt.Get()
+
+// Get the optional value regardless of its emptiness
+v := opt.GetValue()
 
 // Test if the optional is not empty
 opt.IsPresent()
