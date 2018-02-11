@@ -4,7 +4,9 @@
 
 package optional
 
-import "errors"
+import (
+	"errors"
+)
 
 type optional struct {
 	v     interface{}
@@ -12,10 +14,12 @@ type optional struct {
 }
 
 // Create an optional with an initial value
-func Of(in interface{}) optional {
-	o := optional{in, false}
+func Of(in interface{}) (optional, error) {
+	if in == nil {
+		return optional{nil, true}, errors.New("input shall not be null")
+	}
 
-	return o
+	return optional{in, false}, nil
 }
 
 // Create an empty optional

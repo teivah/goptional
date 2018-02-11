@@ -5,8 +5,22 @@ import (
 	"testing"
 )
 
+func TestOfWithNilValue(t *testing.T) {
+	_, err := Of(nil)
+
+	if err == nil {
+		t.FailNow()
+	}
+
+	_, err = Of(5)
+
+	if err != nil {
+		t.FailNow()
+	}
+}
+
 func TestIsPresent(t *testing.T) {
-	a := Of(5)
+	a, _ := Of(5)
 	b := OfEmpty()
 
 	if !a.IsPresent() {
@@ -19,7 +33,7 @@ func TestIsPresent(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
-	a := Of(5)
+	a, _ := Of(5)
 	b := OfEmpty()
 
 	v, err := a.Get()
@@ -36,20 +50,20 @@ func TestGet(t *testing.T) {
 }
 
 func TestIfPresentError(t *testing.T) {
-	a := Of(5)
+	a, _ := Of(5)
 	b := OfEmpty()
 
-	if a.IfPresentError(errors.New("")) != nil {
+	if a.IfPresentError(errors.New("")) == nil {
 		t.FailNow()
 	}
 
-	if b.IfPresentError(errors.New("")) == nil {
+	if b.IfPresentError(errors.New("")) != nil {
 		t.FailNow()
 	}
 }
 
 func TestIfNotPresentError(t *testing.T) {
-	a := Of(5)
+	a, _ := Of(5)
 	b := OfEmpty()
 
 	if a.IfPresentError(errors.New("")) == nil {
@@ -69,7 +83,7 @@ func TestIfPresent(t *testing.T) {
 }
 
 func TestIfNotPresent(t *testing.T) {
-	a := Of(5)
+	a, _ := Of(5)
 
 	a.IfNotPresent(fError2)
 	a.IfNotPresentPanic("test fails")

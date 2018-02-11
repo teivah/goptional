@@ -6,7 +6,10 @@ goptional is a lightweight library to provide a container for optional values in
 
 ```go
 // Create an optional with an initial value
-opt := optional.Of(5)
+opt, _ := optional.Of(5)
+
+// An optional created with a nil value returns an error
+_, err := optional.Of(nil)
 
 // Create an empty optional
 opt := optional.OfEmpty()
