@@ -1,4 +1,4 @@
-package main
+package optional
 
 import (
 	"errors"
