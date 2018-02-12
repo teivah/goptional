@@ -98,6 +98,7 @@ func TestSlice(t *testing.T) {
 func TestStruct(t *testing.T) {
 	var p point
 	var c complexPoint
+	var nilStructPointer *point
 
 	_, err := Of(p)
 
@@ -120,6 +121,12 @@ func TestStruct(t *testing.T) {
 	_, err = Of(complexPoint{0, point{}})
 
 	if err != nil {
+		t.FailNow()
+	}
+
+	_, err = Of(nilStructPointer)
+
+	if err == nil {
 		t.FailNow()
 	}
 }
